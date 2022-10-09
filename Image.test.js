@@ -7,7 +7,10 @@ const TestComponent = () => {
     return <Image source={require('./assets/splash.png')} />
 }
 
-it('does not crash', () => {
-  const component = TestRenderer.create(<TestComponent />)
-  expect(true).toBe(true)
+it('does not crash', async () => {
+  let component
+  TestRenderer.act(() => {
+    component = TestRenderer.create(<TestComponent />)
+  })
+  expect(component.toJSON()).toBeTruthy()
 })
